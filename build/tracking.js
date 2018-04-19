@@ -74,12 +74,14 @@
   //   });
   // };
 
+  var referenceWidth = window.innerWidth * 0.75
+
   // Rear camera mode
   tracking.initUserMedia_ = function(element, opt_options) {
     window.navigator.mediaDevices.getUserMedia({
       video: {
-        width: window.innerWidth,
-        height: window.innerWidth * 0.75,
+        width: referenceWidth,
+        height: referenceWidth * 0.75,
         facingMode: "environment"
       },
       audio: (opt_options && opt_options.audio) ? true : false,

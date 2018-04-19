@@ -26,7 +26,7 @@
   .demo-container {
     position: fixed;
     top: 50%; left: 0;
-    width: 100%;
+	width: 75%;
     height: 0;
     padding-top: 75%;
     transform: translateY(-50%);
@@ -326,13 +326,15 @@
 
       var video = document.getElementById('video');
       var canvas = document.getElementById('canvas');
-      var context = canvas.getContext('2d');
+	  var context = canvas.getContext('2d');
+	  
+	  var referenceWidth = window.innerWidth * 0.75
 
-      video.width = window.innerWidth
-      video.height = window.innerWidth * 0.75
+      video.width = referenceWidth
+      video.height = referenceWidth * 0.75
 
-      canvas.width = window.innerWidth
-      canvas.height = window.innerWidth * 0.75
+      canvas.width = referenceWidth
+      canvas.height = referenceWidth * 0.75
 
       var tracker = new tracking.ColorTracker();
 
@@ -413,6 +415,7 @@
 	// audio
 
 	var audioArr = [];
+	var playedOnce = false;
 
 	audio1 = new Audio('assets/beats/audio-1.mp3');
 	audio1.loop = true;
@@ -439,14 +442,14 @@
 	audio5.volume = 0;
 	audioArr.push(audio5);
 
-	setTimeout(function(){
+	function startPlayback() {
+		playedOnce = true;
 		audio1.play();
 		audio2.play();
 		audio3.play();
 		audio4.play();
 		audio5.play();
-	}, 2000);
-
+	}
 
 	// audio controls
 
@@ -468,6 +471,10 @@
 	function toggleAudio(audioIndex, isOn) {
 
 		var audioToPlay = audioArr[audioIndex];
+
+		if (!playedOnce) {
+			startPlayback();
+		}
 
 		if (isOn) {
 			audioToPlay.volume = 0;
