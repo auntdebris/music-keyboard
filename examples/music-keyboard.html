@@ -6,32 +6,276 @@
 
   <script src="../build/tracking-min.js"></script>
   <script src="assets/dat.gui/build/dat.gui.min.js"></script>
-  <script src="assets/stats.min.js"></script>
+  <!-- <script src="assets/stats.min.js"></script> -->
   <script src="assets/color_camera_gui.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
   <style>
   video,
   canvas {
     position: absolute;
-    /* width: 100%; height: 100%;
-    top: 0; left: 0; */
+    width: 100%; height: 100%;
+    top: 0; left: 0;
   }
+
+  .dg.ac {
+    visibility: hidden;
+  }
+
+  .demo-container {
+    position: fixed;
+    top: 50%; left: 0;
+    width: 100%;
+    height: 0;
+    padding-top: 75%;
+    transform: translateY(-50%);
+  }
+
+  #logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  #stage {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: auto;
+    pointer-events: none;
+  }
+
+  #keyboard {
+    position: fixed;
+    width: 123px;
+    height: 38px;
+    bottom: 20px;
+    left: 20px;
+    pointer-events: none;
+  }
+
+  #keyboard button {
+    border: 0;
+    position: relative;
+    float: left;
+    width: 20%;
+    height: 38px;
+  }
+
+  #keyboard button:focus {
+    outline: none;
+  }
+
+  #keyboard button:nth-child(1) {
+    background: url(assets/ui/keyboard/off-01.png);
+    background-size: cover;
+  }
+
+  #keyboard button:nth-child(2) {
+    background: url(assets/ui/keyboard/off-02.png);
+    background-size: cover;
+  }
+
+  #keyboard button:nth-child(3) {
+    background: url(assets/ui/keyboard/off-03.png);
+    background-size: cover;
+  }
+
+  #keyboard button:nth-child(4) {
+    background: url(assets/ui/keyboard/off-04.png);
+    background-size: cover;
+  }
+
+  #keyboard button:nth-child(5) {
+    background: url(assets/ui/keyboard/off-05.png);
+    background-size: cover;
+  }
+
+
+  #keyboard button:nth-child(1).on {
+    background: url(assets/ui/keyboard/on-01.png);
+    background-size: cover;
+  }
+
+  #keyboard button:nth-child(2).on {
+    background: url(assets/ui/keyboard/on-02.png);
+    background-size: cover;
+  }
+
+  #keyboard button:nth-child(3).on {
+    background: url(assets/ui/keyboard/on-03.png);
+    background-size: cover;
+  }
+
+  #keyboard button:nth-child(4).on {
+    background: url(assets/ui/keyboard/on-04.png);
+    background-size: cover;
+  }
+
+  #keyboard button:nth-child(5).on {
+    background: url(assets/ui/keyboard/on-05.png);
+    background-size: cover;
+  }
+
+  #character-ambient {
+    /* position: fixed;
+    height: 100%;
+    width: 50%;
+    top: 0;
+    right: 0; */
+  }
+
+  #character-ambient img,
+  #character-dance img {
+    position: fixed;
+    width: auto;
+    height: 100%;
+    opacity: 0;
+    bottom: 20%;
+    right: 4%;
+  }
+
   </style>
 </head>
 <body>
 
   <div class="demo-frame">
+    
     <div class="demo-container">
-      <video id="video" width="1920" height="1080" preload autoplay loop muted controls></video>
-      <canvas id="canvas" width="1920" height="1080"></canvas>
+      <video id="video" preload autoplay loop muted controls></video>
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <img id="logo" src="assets/ui/logo.png" width="173" height="101" />
+
+    <div id="keyboard">
+      <button></button>
+      <button></button>
+      <button></button>
+      <button></button>
+      <button></button>
+    </div>
+
+    <img id="stage" src="assets/ui/stage.png" />
+
+    <div id="character-ambient">
+      <img src="assets/character/ambient/AR_Ambient_v01_0000.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0001.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0002.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0003.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0004.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0005.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0006.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0007.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0008.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0009.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0010.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0011.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0012.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0013.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0014.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0015.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0016.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0017.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0018.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0019.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0020.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0021.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0022.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0023.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0024.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0025.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0026.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0027.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0028.png" />
+      <img src="assets/character/ambient/AR_Ambient_v01_0029.png" />
+    </div>
+
+    <div id="character-dance">
+      <img src="assets/character/dance/AR_Dance_v01_0000.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0001.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0002.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0003.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0004.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0005.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0006.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0007.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0008.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0009.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0010.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0011.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0012.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0013.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0014.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0015.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0016.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0017.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0018.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0019.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0020.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0021.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0022.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0023.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0024.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0025.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0026.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0027.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0028.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0029.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0030.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0031.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0032.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0033.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0034.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0035.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0036.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0037.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0038.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0039.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0040.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0041.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0042.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0043.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0044.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0045.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0046.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0047.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0048.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0049.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0050.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0051.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0052.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0053.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0054.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0055.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0056.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0057.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0058.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0059.png" />
+      <img src="assets/character/dance/AR_Dance_v01_0060.png" />
     </div>
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="vendor/jquery-3.2.1.min.js"><\/script>')</script>
+
   <script>
+
+    // tracking
+
     window.onload = function() {
       var video = document.getElementById('video');
       var canvas = document.getElementById('canvas');
       var context = canvas.getContext('2d');
+
+      video.width = window.innerWidth
+      video.height = window.innerWidth * 0.75
+
+      canvas.width = window.innerWidth
+      canvas.height = window.innerWidth * 0.75
 
       var tracker = new tracking.ColorTracker();
 
@@ -55,7 +299,85 @@
       });
 
      initGUIControllers(tracker);
-    };
+
+
+
+    // character
+
+    var mode = "ambient"
+
+    var $ambient = $('#character-ambient');
+    var ambientImgs = $ambient.find('img');
+    var ambientCount = 0;
+    var ambientMax = 29;
+
+    var $dance = $('#character-dance');
+    var danceImgs = $dance.find('img');
+    var danceCount = 0;
+    var danceMax = 29;
+
+    function animateAmbient() {
+
+      ambientImgs.removeAttr('style');
+      $(ambientImgs[ambientCount]).css('opacity', 1);
+      
+      if (ambientCount === ambientMax) {
+        ambientCount = 0;
+      } else {
+        ambientCount++;
+      }
+
+      window.requestAnimationFrame(animateAmbient);
+    }
+
+    function animateDance() {
+
+      danceImgs.removeAttr('style');
+      $(danceImgs[danceCount]).css('opacity', 1);
+
+      if (danceCount === danceMax) {
+        danceCount = 0;
+      } else {
+        danceCount++;
+      }
+
+      window.requestAnimationFrame(animateDance);
+    }
+
+    if (mode === "dance"){
+      window.requestAnimationFrame(animateDance);
+    } else {
+      window.requestAnimationFrame(animateAmbient);
+	}
+	
+
+
+	// audio
+
+	audio1 = new Audio('assets/beats/audio-1.mp3');
+	audio1.loop = true;
+
+	audio2 = new Audio('assets/beats/audio-2.mp3');
+	audio2.loop = true;
+
+	audio3 = new Audio('assets/beats/audio-3.mp3');
+	audio3.loop = true;
+
+	audio4 = new Audio('assets/beats/audio-4.mp3');
+	audio4.loop = true;
+
+	audio5 = new Audio('assets/beats/audio-5.mp3');
+	audio5.loop = true;
+
+	// setTimeout(function(){
+	// 	audio1.play();
+	// 	audio2.play();
+	// 	audio3.play();
+	// 	audio4.play();
+	// 	audio5.play();
+	// }, 2000);
+};
+
   </script>
 
 </body>

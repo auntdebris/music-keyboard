@@ -71,9 +71,11 @@
   tracking.initUserMedia_ = function(element, opt_options) {
     window.navigator.mediaDevices.getUserMedia({
       video: {
-        facingMode: {
-          exact: "environment"
-        }
+        width: window.innerWidth,
+        height: window.innerWidth * 0.75
+        // facingMode: {
+        //   exact: "environment"
+        // }
       },
       audio: (opt_options && opt_options.audio) ? true : false,
     }).then(function(stream) {

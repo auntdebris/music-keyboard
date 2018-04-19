@@ -63,31 +63,9 @@
    */
   
   // Front camera mode
-  tracking.initUserMedia_ = function(element, opt_options) {
-    window.navigator.mediaDevices.getUserMedia({
-      video: {
-        width: {
-          ideal: window.innerWidth
-        },
-        height: {
-          ideal: window.innerHeight
-        },
-      audio: (opt_options && opt_options.audio) ? true : false,
-    }).then(function(stream) {
-      element.srcObject = stream;
-    }).catch(function(err) {
-      throw Error('Cannot capture user camera.');
-    });
-  };
-
-  // Rear camera mode
   // tracking.initUserMedia_ = function(element, opt_options) {
   //   window.navigator.mediaDevices.getUserMedia({
-  //     video: {
-  //       facingMode: {
-  //         exact: "environment"
-  //       }
-  //     },
+  //     video: true,
   //     audio: (opt_options && opt_options.audio) ? true : false,
   //   }).then(function(stream) {
   //     element.srcObject = stream;
@@ -95,6 +73,24 @@
   //     throw Error('Cannot capture user camera.');
   //   });
   // };
+
+  // Rear camera mode
+  tracking.initUserMedia_ = function(element, opt_options) {
+    window.navigator.mediaDevices.getUserMedia({
+      video: {
+        width: window.innerWidth,
+        height: window.innerWidth * 0.75
+        // facingMode: {
+        //   exact: "environment"
+        // }
+      },
+      audio: (opt_options && opt_options.audio) ? true : false,
+    }).then(function(stream) {
+      element.srcObject = stream;
+    }).catch(function(err) {
+      throw Error('Cannot capture user camera.');
+    });
+  };
 
   /**
    * Tests whether the object is a dom node.
