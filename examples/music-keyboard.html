@@ -148,7 +148,7 @@
 		left: 0;
 		opacity: 0.5;
 		transform-origin: 50% 50%;
-		min-width: 200px;
+		min-width: 150px;
 	}
 
 	#controls button {
@@ -367,6 +367,8 @@
 				height: rect.height + 'px',
 				transform: 'translate3d('+ rect.x +'px, '+ rect.y +'px, 0'
 			});
+
+			return false;
 
 			// console.log(rect)
         //   if (rect.color === 'custom') {
