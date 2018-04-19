@@ -55,6 +55,8 @@
     bottom: 20px;
     left: 20px;
     pointer-events: none;
+	background: url(assets/ui/keyboard/keyboard-off.png);
+	background-size: cover;
   }
 
   #keyboard button {
@@ -137,6 +139,36 @@
     bottom: 20%;
     right: 4%;
   }
+
+    #controls {
+		position: fixed;
+		width: 50%;
+		height: 50px;
+		top: 40%;
+		left: 25%;
+		opacity: 0.5;
+	}
+
+	#controls button {
+		border: 0;
+		position: relative;
+		float: left;
+		width: 20%;
+		height: 50px;
+		background: gray;
+	}
+
+	#controls button:nth-child(odd) {
+		background: lightgray;
+	}
+
+	#controls button:focus {
+		outline: none;
+	}
+
+	#controls button.on {
+		background: #0f0;
+	}
 
   </style>
 </head>
@@ -256,7 +288,15 @@
       <img src="assets/character/dance/AR_Dance_v01_0058.png" />
       <img src="assets/character/dance/AR_Dance_v01_0059.png" />
       <img src="assets/character/dance/AR_Dance_v01_0060.png" />
-    </div>
+	</div>
+	
+	<div id="controls">
+		<button>1</button>
+		<button>2</button>
+		<button>3</button>
+		<button>4</button>
+		<button>5</button>
+	</div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -264,9 +304,26 @@
 
   <script>
 
+	  
+    window.onload = function() {
+		
+		// preload images
+
+		var img1 = new Image();
+		var img2 = new Image();
+		var img3 = new Image();
+		var img4 = new Image();
+		var img5 = new Image();
+
+		img1.src = 'assets/ui/keyboard/on-01.png';
+		img2.src = 'assets/ui/keyboard/on-02.png';
+		img3.src = 'assets/ui/keyboard/on-03.png';
+		img4.src = 'assets/ui/keyboard/on-04.png';
+		img5.src = 'assets/ui/keyboard/on-05.png';
+
     // tracking
 
-    window.onload = function() {
+
       var video = document.getElementById('video');
       var canvas = document.getElementById('canvas');
       var context = canvas.getContext('2d');
@@ -314,7 +371,9 @@
     var $dance = $('#character-dance');
     var danceImgs = $dance.find('img');
     var danceCount = 0;
-    var danceMax = 29;
+	var danceMax = 29;
+	
+	var raf;
 
     function animateAmbient() {
 
@@ -327,7 +386,7 @@
         ambientCount++;
       }
 
-      window.requestAnimationFrame(animateAmbient);
+      raf = window.requestAnimationFrame(animateAmbient);
     }
 
     function animateDance() {
@@ -341,41 +400,100 @@
         danceCount++;
       }
 
-      window.requestAnimationFrame(animateDance);
+      raf = window.requestAnimationFrame(animateDance);
     }
 
     if (mode === "dance"){
-      window.requestAnimationFrame(animateDance);
+      raf = window.requestAnimationFrame(animateDance);
     } else {
-      window.requestAnimationFrame(animateAmbient);
+      raf = window.requestAnimationFrame(animateAmbient);
 	}
-	
 
 
 	// audio
 
+	var audioArr = [];
+
 	audio1 = new Audio('assets/beats/audio-1.mp3');
 	audio1.loop = true;
+	audio1.volume = 0;
+	audioArr.push(audio1);
 
 	audio2 = new Audio('assets/beats/audio-2.mp3');
 	audio2.loop = true;
+	audio2.volume = 0;
+	audioArr.push(audio2);
 
 	audio3 = new Audio('assets/beats/audio-3.mp3');
 	audio3.loop = true;
+	audio3.volume = 0;
+	audioArr.push(audio3);
 
 	audio4 = new Audio('assets/beats/audio-4.mp3');
 	audio4.loop = true;
+	audio4.volume = 0;
+	audioArr.push(audio4);
 
 	audio5 = new Audio('assets/beats/audio-5.mp3');
 	audio5.loop = true;
+	audio5.volume = 0;
+	audioArr.push(audio5);
 
-	// setTimeout(function(){
-	// 	audio1.play();
-	// 	audio2.play();
-	// 	audio3.play();
-	// 	audio4.play();
-	// 	audio5.play();
-	// }, 2000);
+	setTimeout(function(){
+		audio1.play();
+		audio2.play();
+		audio3.play();
+		audio4.play();
+		audio5.play();
+	}, 2000);
+
+
+	// audio controls
+
+	var $controls = $('#controls');
+	var $controlBtns = $controls.find('button');
+
+	$controlBtns.on('click', function(){
+
+		var audioIndex = $(this).index();
+
+		toggleAudio(audioIndex, $(this).hasClass('on'));
+
+		$(this).toggleClass('on');
+		$('#keyboard button').eq(audioIndex).toggleClass('on');
+
+		setDancingChar();
+	});
+
+	function toggleAudio(audioIndex, isOn) {
+
+		var audioToPlay = audioArr[audioIndex];
+
+		if (isOn) {
+			audioToPlay.volume = 0;
+		} else {
+			audioToPlay.volume = 1;
+		}
+	}
+
+	// dancing char
+
+	function setDancingChar() {
+
+		var isPlaying = Boolean($('#keyboard').find('.on').length);
+
+		if (isPlaying) {
+			cancelAnimationFrame(raf);
+			raf = window.requestAnimationFrame(animateDance);
+			$ambient.hide();
+			$dance.show();
+		} else {
+			cancelAnimationFrame(raf);
+			raf = window.requestAnimationFrame(animateAmbient);
+			$ambient.show();
+			$dance.hide();
+		}
+	}
 };
 
   </script>
