@@ -84,8 +84,8 @@ function initGUIControllers(tracker) {
 
   var parametersFolder = gui.addFolder('Parameters');
 
-  parametersFolder.add(tracker, 'minDimension', 1, 100);
-  parametersFolder.add(tracker, 'minGroupSize', 1, 100);
+  parametersFolder.add(tracker, 'minDimension', 1, 150);
+  parametersFolder.add(tracker, 'minGroupSize', 1, 150);
 
   colorsFolder.open();
   parametersFolder.open();
