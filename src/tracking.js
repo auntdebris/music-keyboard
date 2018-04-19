@@ -67,7 +67,7 @@
   //   });
   // };
 
-  var referenceWidth = window.innerWidth * 0.8
+  var referenceWidth = window.innerWidth / 2
 
   // Rear camera mode
   tracking.initUserMedia_ = function(element, opt_options) {
