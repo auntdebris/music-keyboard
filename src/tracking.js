@@ -72,10 +72,8 @@
     window.navigator.mediaDevices.getUserMedia({
       video: {
         width: window.innerWidth,
-        height: window.innerWidth * 0.75
-        // facingMode: {
-        //   exact: "environment"
-        // }
+        height: window.innerWidth * 0.75,
+        facingMode: "environment"
       },
       audio: (opt_options && opt_options.audio) ? true : false,
     }).then(function(stream) {
