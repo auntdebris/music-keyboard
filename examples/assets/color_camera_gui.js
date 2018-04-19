@@ -19,6 +19,8 @@ function initGUIControllers(tracker) {
     var customColorG = parseInt(components[2], 16);
     var customColorB = parseInt(components[3], 16);
 
+    console.log('customColorB', customColorB)
+
     var colorTotal = customColorR + customColorG + customColorB;
 
     if (colorTotal === 0) {

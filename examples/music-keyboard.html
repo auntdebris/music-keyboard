@@ -12,6 +12,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
   <style>
+	@keyframes fade {
+		0% { opacity: 1; }
+		25% { opacity: 1; }
+		75% { opacity: 0.5; }
+		100% { opacity: 1; }
+	}
   video,
   canvas {
     position: absolute;
@@ -65,59 +71,84 @@
     float: left;
     width: 20%;
     height: 38px;
+	background: none;
+  }
+
+  #keyboard button i {
+	  position: absolute;
+	  width: 100%;
+	  height: 100%;
+	  top: 0;
+	  left: 0;
   }
 
   #keyboard button:focus {
     outline: none;
   }
 
-  #keyboard button:nth-child(1) {
+  #keyboard button.on i {
+	  animation: fade 800ms ease-in-out infinite;
+  }
+
+  #keyboard button.on:before {
+	  content: "";
+	  display: block;
+	  position: absolute;
+	  top: -22px;
+	  left: 7px;
+	  width: 17px;
+	  height: 15px;
+	  background: url(assets/ui/sound-on.png);
+	  background-size: cover;
+  }
+
+  #keyboard button:nth-child(1) i {
     background: url(assets/ui/keyboard/off-01.png);
     background-size: cover;
   }
 
-  #keyboard button:nth-child(2) {
+  #keyboard button:nth-child(2) i {
     background: url(assets/ui/keyboard/off-02.png);
     background-size: cover;
   }
 
-  #keyboard button:nth-child(3) {
+  #keyboard button:nth-child(3) i {
     background: url(assets/ui/keyboard/off-03.png);
     background-size: cover;
   }
 
-  #keyboard button:nth-child(4) {
+  #keyboard button:nth-child(4) i {
     background: url(assets/ui/keyboard/off-04.png);
     background-size: cover;
   }
 
-  #keyboard button:nth-child(5) {
+  #keyboard button:nth-child(5) i {
     background: url(assets/ui/keyboard/off-05.png);
     background-size: cover;
   }
 
 
-  #keyboard button:nth-child(1).on {
+  #keyboard button:nth-child(1).on i {
     background: url(assets/ui/keyboard/on-01.png);
     background-size: cover;
   }
 
-  #keyboard button:nth-child(2).on {
+  #keyboard button:nth-child(2).on i {
     background: url(assets/ui/keyboard/on-02.png);
     background-size: cover;
   }
 
-  #keyboard button:nth-child(3).on {
+  #keyboard button:nth-child(3).on i {
     background: url(assets/ui/keyboard/on-03.png);
     background-size: cover;
   }
 
-  #keyboard button:nth-child(4).on {
+  #keyboard button:nth-child(4).on i {
     background: url(assets/ui/keyboard/on-04.png);
     background-size: cover;
   }
 
-  #keyboard button:nth-child(5).on {
+  #keyboard button:nth-child(5).on i {
     background: url(assets/ui/keyboard/on-05.png);
     background-size: cover;
   }
@@ -134,10 +165,10 @@
   #character-dance img {
     position: fixed;
     width: auto;
-    height: 100%;
+	height: 120%;
     opacity: 0;
-    bottom: 20%;
-    right: 4%;
+    bottom: 1%;
+    right: -1%;
   }
 
     #controls {
@@ -182,6 +213,12 @@
 		background: white;
 	}
 
+	#instructions {
+		position: fixed;
+		bottom: 28px;
+		left: 157px;
+	}
+
   </style>
 </head>
 <body>
@@ -196,110 +233,112 @@
     <img id="logo" src="assets/ui/logo.png" width="173" height="101" />
 
     <div id="keyboard">
-      <button></button>
-      <button></button>
-      <button></button>
-      <button></button>
-      <button></button>
-    </div>
+      <button><i></i></button>
+      <button><i></i></button>
+      <button><i></i></button>
+      <button><i></i></button>
+      <button><i></i></button>
+	</div>
+	
+	<img id="instructions" src="assets/ui/play-the-keys.png" width="70" height="17" />
 
     <img id="stage" src="assets/ui/stage.png" />
 
     <div id="character-ambient">
-      <img src="assets/character/ambient/AR_Ambient_v01_0000.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0001.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0002.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0003.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0004.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0005.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0006.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0007.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0008.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0009.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0010.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0011.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0012.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0013.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0014.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0015.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0016.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0017.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0018.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0019.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0020.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0021.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0022.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0023.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0024.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0025.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0026.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0027.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0028.png" />
-      <img src="assets/character/ambient/AR_Ambient_v01_0029.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0000.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0001.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0002.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0003.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0004.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0005.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0006.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0007.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0008.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0009.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0010.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0011.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0012.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0013.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0014.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0015.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0016.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0017.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0018.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0019.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0020.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0021.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0022.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0023.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0024.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0025.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0026.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0027.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0028.png" />
+      <img src="assets/character/ambient/Active_Ambient-With Alpha_0029.png" />
     </div>
 
     <div id="character-dance">
-      <img src="assets/character/dance/AR_Dance_v01_0000.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0001.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0002.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0003.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0004.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0005.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0006.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0007.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0008.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0009.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0010.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0011.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0012.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0013.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0014.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0015.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0016.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0017.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0018.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0019.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0020.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0021.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0022.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0023.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0024.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0025.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0026.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0027.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0028.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0029.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0030.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0031.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0032.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0033.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0034.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0035.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0036.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0037.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0038.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0039.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0040.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0041.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0042.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0043.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0044.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0045.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0046.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0047.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0048.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0049.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0050.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0051.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0052.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0053.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0054.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0055.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0056.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0057.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0058.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0059.png" />
-      <img src="assets/character/dance/AR_Dance_v01_0060.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0000.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0001.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0002.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0003.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0004.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0005.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0006.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0007.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0008.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0009.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0010.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0011.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0012.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0013.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0014.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0015.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0016.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0017.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0018.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0019.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0020.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0021.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0022.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0023.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0024.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0025.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0026.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0027.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0028.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0029.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0030.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0031.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0032.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0033.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0034.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0035.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0036.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0037.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0038.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0039.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0040.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0041.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0042.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0043.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0044.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0045.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0046.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0047.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0048.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0049.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0050.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0051.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0052.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0053.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0054.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0055.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0056.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0057.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0058.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0059.png" />
+      <img src="assets/character/dance/Active_Dance_withAlpha_0060.png" />
 	</div>
 	
 	<div id="controls">
