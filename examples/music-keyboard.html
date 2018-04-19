@@ -170,13 +170,22 @@
 		background: #0f0;
 	}
 
+	#fs {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background: white;
+	}
+
   </style>
 </head>
 <body>
 
   <div class="demo-frame">
     
-    <div class="demo-container">
+    <div id="demo" class="demo-container">
       <video id="video" preload autoplay loop muted webkit-playsinline></video>
       <canvas id="canvas"></canvas>
     </div>
@@ -298,6 +307,10 @@
 		<button>5</button>
 	</div>
   </div>
+
+  <button id="fs">
+	  START
+  </button>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script>window.jQuery || document.write('<script src="vendor/jquery-3.2.1.min.js"><\/script>')</script>
@@ -501,6 +514,28 @@
 			$dance.hide();
 		}
 	}
+
+
+	// fullscreen
+
+	function toggleFullScreen() {
+		var doc = window.document;
+		var docEl = doc.documentElement;
+
+		var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+		var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+			requestFullScreen.call(docEl);
+		} else {
+			cancelFullScreen.call(doc);
+		}
+	}
+
+	$('#fs').on('click', function(){
+		$(this).fadeOut('slow');
+		toggleFullScreen();
+	});
 };
 
   </script>
