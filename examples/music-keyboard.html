@@ -144,9 +144,10 @@
 		position: fixed;
 		width: 50%;
 		height: 50px;
-		top: 40%;
-		left: 25%;
+		top: 0;
+		left: 0;
 		opacity: 0.5;
+		transform-origin: 50% 50%;
 	}
 
 	#controls button {
@@ -154,7 +155,8 @@
 		position: relative;
 		float: left;
 		width: 20%;
-		height: 50px;
+		height: 100%;
+		bottom: 100%;
 		background: gray;
 	}
 
@@ -349,7 +351,8 @@
       canvas.width = referenceWidth
       canvas.height = referenceWidth * 0.75
 
-      var tracker = new tracking.ColorTracker();
+	  var tracker = new tracking.ColorTracker();
+	  var $controls = $('#controls');
 
       tracking.track('#video', tracker, { camera: true });
 
@@ -357,16 +360,24 @@
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         event.data.forEach(function(rect) {
-          if (rect.color === 'custom') {
-            rect.color = tracker.customColor;
-          }
 
-          context.strokeStyle = rect.color;
-          context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-          context.font = '11px Helvetica';
-          context.fillStyle = "#fff";
-          context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-          context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+			$controls.css({
+				width: rect.width + 'px',
+				height: rect.height + 'px',
+				transform: 'translate3d('+ rect.x +'px, '+ rect.y +'px, 0'
+			});
+
+			// console.log(rect)
+        //   if (rect.color === 'custom') {
+        //     rect.color = tracker.customColor;
+        //   }
+
+        //   context.strokeStyle = rect.color;
+        //   context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+        //   context.font = '11px Helvetica';
+        //   context.fillStyle = "#fff";
+        //   context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+        //   context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
         });
       });
 
