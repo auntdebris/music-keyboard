@@ -374,7 +374,7 @@
 
     var qs = window.location.search;
 
-    if (qs === '?debug') {
+    if (qs.indexOf('?debug') > -1) {
       $('body').addClass('debug');
     }
 	  
