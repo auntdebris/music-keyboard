@@ -380,12 +380,38 @@
   // Default colors
   //===================
 
-  tracking.ColorTracker.registerColor('cyan', function(r, g, b) {
+  // tracking.ColorTracker.registerColor('cyan', function(r, g, b) {
+  //   var thresholdGreen = 50,
+  //     thresholdBlue = 70,
+  //     dx = r - 0,
+  //     dy = g - 255,
+  //     dz = b - 255;
+
+  //   if ((g - r) >= thresholdGreen && (b - r) >= thresholdBlue) {
+  //     return true;
+  //   }
+  //   return dx * dx + dy * dy + dz * dz < 6400;
+  // });
+
+  // tracking.ColorTracker.registerColor('poop', function(r, g, b) {
+  //   var thresholdGreen = 50,
+  //     thresholdBlue = 70,
+  //     dx = r - 241,
+  //     dy = g - 73,
+  //     dz = b - 20;
+
+  //   if ((g - r) >= thresholdGreen && (b - r) >= thresholdBlue) {
+  //     return true;
+  //   }
+  //   return dx * dx + dy * dy + dz * dz < 6400;
+  // });
+
+  tracking.ColorTracker.registerColor('poop', function(r, g, b) {
     var thresholdGreen = 50,
       thresholdBlue = 70,
-      dx = r - 0,
-      dy = g - 255,
-      dz = b - 255;
+      dx = r - 64,
+      dy = g - 24,
+      dz = b - 6;
 
     if ((g - r) >= thresholdGreen && (b - r) >= thresholdBlue) {
       return true;
@@ -393,29 +419,69 @@
     return dx * dx + dy * dy + dz * dz < 6400;
   });
 
-  tracking.ColorTracker.registerColor('magenta', function(r, g, b) {
-    var threshold = 50,
-      dx = r - 255,
-      dy = g - 0,
-      dz = b - 255;
+  // tracking.ColorTracker.registerColor('poop1', function(r, g, b) {
+  //   var thresholdGreen = 50,
+  //     thresholdBlue = 70,
+  //     dx = r - 92,
+  //     dy = g - 46,
+  //     dz = b -  18;
 
-    if ((r - g) >= threshold && (b - g) >= threshold) {
-      return true;
-    }
-    return dx * dx + dy * dy + dz * dz < 19600;
-  });
+  //   if ((g - r) >= thresholdGreen && (b - r) >= thresholdBlue) {
+  //     return true;
+  //   }
+  //   return dx * dx + dy * dy + dz * dz < 6400;
+  // });
 
-  tracking.ColorTracker.registerColor('yellow', function(r, g, b) {
-    var threshold = 50,
-      dx = r - 255,
-      dy = g - 255,
-      dz = b - 0;
+  // tracking.ColorTracker.registerColor('poop2', function(r, g, b) {
+  //   var thresholdGreen = 50,
+  //     thresholdBlue = 70,
+  //     dx = r - 64,
+  //     dy = g - 24,
+  //     dz = b -  6;
 
-    if ((r - b) >= threshold && (g - b) >= threshold) {
-      return true;
-    }
-    return dx * dx + dy * dy + dz * dz < 10000;
-  });
+  //   if ((g - r) >= thresholdGreen && (b - r) >= thresholdBlue) {
+  //     return true;
+  //   }
+  //   return dx * dx + dy * dy + dz * dz < 6400;
+  // });
+
+  // tracking.ColorTracker.registerColor('poop3', function(r, g, b) {
+  //   var thresholdGreen = 50,
+  //     thresholdBlue = 70,
+  //     dx = r - 86,
+  //     dy = g - 42,
+  //     dz = b -  20;
+
+  //   if ((g - r) >= thresholdGreen && (b - r) >= thresholdBlue) {
+  //     return true;
+  //   }
+  //   return dx * dx + dy * dy + dz * dz < 6400;
+  // });
+
+
+  // tracking.ColorTracker.registerColor('magenta', function(r, g, b) {
+  //   var threshold = 50,
+  //     dx = r - 255,
+  //     dy = g - 0,
+  //     dz = b - 255;
+
+  //   if ((r - g) >= threshold && (b - g) >= threshold) {
+  //     return true;
+  //   }
+  //   return dx * dx + dy * dy + dz * dz < 19600;
+  // });
+
+  // tracking.ColorTracker.registerColor('yellow', function(r, g, b) {
+  //   var threshold = 50,
+  //     dx = r - 255,
+  //     dy = g - 255,
+  //     dz = b - 0;
+
+  //   if ((r - b) >= threshold && (g - b) >= threshold) {
+  //     return true;
+  //   }
+  //   return dx * dx + dy * dy + dz * dz < 10000;
+  // });
 
 
   // Caching neighbour i/j offset values.

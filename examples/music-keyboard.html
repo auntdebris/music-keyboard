@@ -26,7 +26,7 @@
   }
 
   .dg.ac {
-    visibility: hidden;
+    /* visibility: hidden; */
   }
 
   .demo-container {
@@ -180,7 +180,7 @@
 		opacity: 0.5;
 		transform-origin: 50% 50%;
 		min-width: 150px;
-		opacity: 0;
+		/* opacity: 0; */
 	}
 
 	#controls button {
@@ -227,7 +227,7 @@
   <div class="demo-frame">
     
     <div id="demo" class="demo-container">
-      <video id="video" preload></video>
+      <video id="video" preload autoplay loop muted webkit-playsinline></video>
       <canvas id="canvas"></canvas>
     </div>
 
@@ -393,7 +393,9 @@
       canvas.height = referenceWidth * 0.75
 
 	  var tracker = new tracking.ColorTracker();
-	  var $controls = $('#controls');
+    var $controls = $('#controls');
+    
+    
 
       tracking.track('#video', tracker, { camera: true });
 
@@ -587,7 +589,6 @@
 	}
 
 	$('#fs').on('click', function(){
-    video.play();
 		$(this).fadeOut('slow');
 		toggleFullScreen();
 	});

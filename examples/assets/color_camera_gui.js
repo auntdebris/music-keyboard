@@ -19,8 +19,6 @@ function initGUIControllers(tracker) {
     var customColorG = parseInt(components[2], 16);
     var customColorB = parseInt(components[3], 16);
 
-    console.log('customColorB', customColorB)
-
     var colorTotal = customColorR + customColorG + customColorB;
 
     if (colorTotal === 0) {
@@ -86,8 +84,8 @@ function initGUIControllers(tracker) {
 
   var parametersFolder = gui.addFolder('Parameters');
 
-  parametersFolder.add(tracker, 'minDimension', 1, 150);
-  parametersFolder.add(tracker, 'minGroupSize', 1, 150);
+  parametersFolder.add(tracker, 'minDimension', 1, 100);
+  parametersFolder.add(tracker, 'minGroupSize', 1, 100);
 
   colorsFolder.open();
   parametersFolder.open();
