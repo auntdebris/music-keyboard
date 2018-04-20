@@ -2129,7 +2129,7 @@
    * @default 20
    * @type {number}
    */
-  tracking.ColorTracker.prototype.minDimension = 20;
+  tracking.ColorTracker.prototype.minDimension = 40;
 
   /**
    * Holds the maximum dimension to classify a rectangle.
@@ -2460,20 +2460,14 @@
   //   return dx * dx + dy * dy + dz * dz < 6400;
   // });
 
-  tracking.ColorTracker.registerColor('poop', function(r, g, b) {
-    var thresholdGreen = 50,
-      thresholdBlue = 70,
-      dx = r - 64,
-      dy = g - 24,
-      dz = b - 6;
 
-    if ((g - r) >= thresholdGreen && (b - r) >= thresholdBlue) {
-      return true;
-    }
-    return dx * dx + dy * dy + dz * dz < 6400;
-  });
+  //   if ((g - r) >= thresholdGreen && (b - r) >= thresholdBlue) {
+  //     return true;
+  //   }
+  //   return dx * dx + dy * dy + dz * dz < 6400;
+  // });
 
-  // tracking.ColorTracker.registerColor('poop1', function(r, g, b) {
+  // tracking.ColorTracker.registerColor('brown1', function(r, g, b) {
   //   var thresholdGreen = 50,
   //     thresholdBlue = 70,
   //     dx = r - 92,
@@ -2486,7 +2480,7 @@
   //   return dx * dx + dy * dy + dz * dz < 6400;
   // });
 
-  // tracking.ColorTracker.registerColor('poop2', function(r, g, b) {
+  // tracking.ColorTracker.registerColor('brown2', function(r, g, b) {
   //   var thresholdGreen = 50,
   //     thresholdBlue = 70,
   //     dx = r - 64,
@@ -2499,7 +2493,7 @@
   //   return dx * dx + dy * dy + dz * dz < 6400;
   // });
 
-  // tracking.ColorTracker.registerColor('poop3', function(r, g, b) {
+  // tracking.ColorTracker.registerColor('brown3', function(r, g, b) {
   //   var thresholdGreen = 50,
   //     thresholdBlue = 70,
   //     dx = r - 86,
@@ -2525,17 +2519,25 @@
   //   return dx * dx + dy * dy + dz * dz < 19600;
   // });
 
-  // tracking.ColorTracker.registerColor('yellow', function(r, g, b) {
-  //   var threshold = 50,
-  //     dx = r - 255,
-  //     dy = g - 255,
-  //     dz = b - 0;
 
-  //   if ((r - b) >= threshold && (g - b) >= threshold) {
-  //     return true;
-  //   }
-  //   return dx * dx + dy * dy + dz * dz < 10000;
-  // });
+  tracking.ColorTracker.registerColor('kinder', function(r, g, b) {
+    var thresholdGreen = 50,
+      thresholdBlue = 70,
+      dx = r - 64,
+      dy = g - 24,
+      dz = b - 6;
+
+  tracking.ColorTracker.registerColor('yellow', function(r, g, b) {
+    var threshold = 50,
+      dx = r - 255,
+      dy = g - 255,
+      dz = b - 0;
+
+    if ((r - b) >= threshold && (g - b) >= threshold) {
+      return true;
+    }
+    return dx * dx + dy * dy + dz * dz < 10000;
+  });
 
 
   // Caching neighbour i/j offset values.

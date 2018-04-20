@@ -26,7 +26,7 @@
   }
 
   .dg.ac {
-    /* visibility: hidden; */
+    visibility: hidden;
   }
 
   .demo-container {
@@ -180,10 +180,10 @@
 		opacity: 0.5;
 		transform-origin: 50% 50%;
 		min-width: 150px;
-		/* opacity: 0; */
+		opacity: 0;
 	}
 
-	#controls button {
+  #controls button {
 		border: 0;
 		position: relative;
 		float: left;
@@ -211,7 +211,8 @@
 		height: 100%;
 		top: 0;
 		left: 0;
-		background: white;
+		background: url(assets/ui/splash.jpg);
+    background-size: cover;
 	}
 
 	#instructions {
@@ -219,6 +220,19 @@
 		bottom: 28px;
 		left: 157px;
 	}
+
+  .debug #controls {
+    opacity: 1;
+  }
+
+  .debug #instructions,
+  .debug #fs,
+  .debug #character-ambient,
+  .debug #character-dance,
+  .debug #logo,
+  .debug #stage {
+    opacity: 0;
+  }
 
   </style>
 </head>
@@ -351,15 +365,18 @@
 	</div>
   </div>
 
-  <button id="fs">
-	  START
-  </button>
+  <button id="fs"></button>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script>window.jQuery || document.write('<script src="vendor/jquery-3.2.1.min.js"><\/script>')</script>
 
   <script>
 
+    var qs = window.location.search;
+
+    if (qs === '?debug') {
+      $('body').addClass('debug');
+    }
 	  
     window.onload = function() {
 		
@@ -384,22 +401,54 @@
       var canvas = document.getElementById('canvas');
 	  var context = canvas.getContext('2d');
 	  
-	  var referenceWidth = window.innerWidth
+	  var referenceWidth = window.innerWidth;
 
-      video.width = referenceWidth
-      video.height = referenceWidth * 0.75
+      video.width = referenceWidth;
+      video.height = referenceWidth * 0.75;
 
-      canvas.width = referenceWidth
-      canvas.height = referenceWidth * 0.75
+      canvas.width = referenceWidth;
+      canvas.height = referenceWidth * 0.75;
+
+      var trackingTimeout;
+      var offTimeout;
+
+      function musicOff(){
+        audio1.pause();
+        audio2.pause();
+        audio3.pause();
+        audio4.pause();
+        audio5.pause();
+        
+        clearTimeout(trackingTimeout);
+        trackingTimeout = setTimeout(function(){
+          musicOn();
+        }, 3000);
+      }
+
+      function musicOn(){
+
+        clearTimeout(trackingTimeout);
+        audio1.play();
+        audio2.play();
+        audio3.play();
+        audio4.play();
+        audio5.play();
+      }
 
 	  var tracker = new tracking.ColorTracker();
     var $controls = $('#controls');
-    
-    
 
       tracking.track('#video', tracker, { camera: true });
 
       tracker.on('track', function(event) {
+
+        if(!event.data.length){
+          musicPlaying = false;
+          musicOff();
+        } else {
+          musicOn();
+        }
+        
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         event.data.forEach(function(rect) {
