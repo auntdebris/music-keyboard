@@ -2129,7 +2129,7 @@
    * @default 20
    * @type {number}
    */
-  tracking.ColorTracker.prototype.minDimension = 40;
+  tracking.ColorTracker.prototype.minDimension = 20;
 
   /**
    * Holds the maximum dimension to classify a rectangle.
@@ -2521,17 +2521,16 @@
 
 
   tracking.ColorTracker.registerColor('kinder', function(r, g, b) {
-    var thresholdGreen = 50,
-      thresholdBlue = 70,
-      dx = r - 64,
-      dy = g - 24,
-      dz = b - 6;
-
-  tracking.ColorTracker.registerColor('yellow', function(r, g, b) {
     var threshold = 50,
-      dx = r - 255,
-      dy = g - 255,
-      dz = b - 0;
+      dx = r - 57,
+      dy = g - 25,
+      dz = b - 7;
+
+  // tracking.ColorTracker.registerColor('yellow', function(r, g, b) {
+  //   var threshold = 50,
+  //     dx = r - 255,
+  //     dy = g - 255,
+  //     dz = b - 0;
 
     if ((r - b) >= threshold && (g - b) >= threshold) {
       return true;
