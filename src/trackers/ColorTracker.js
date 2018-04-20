@@ -467,11 +467,10 @@
 
 
   tracking.ColorTracker.registerColor('kinder', function(r, g, b) {
-    var thresholdGreen = 50,
-      thresholdBlue = 70,
-      dx = r - 64,
-      dy = g - 24,
-      dz = b - 6;
+    var threshold = 50,
+      dx = r - 57,
+      dy = g - 25,
+      dz = b - 7;
 
   // tracking.ColorTracker.registerColor('yellow', function(r, g, b) {
   //   var threshold = 50,
